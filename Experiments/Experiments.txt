@@ -1,0 +1,4 @@
+Baseline model: 75.8% 
+
+Experiment 1: TEST
+Experiment 2: VGG16
