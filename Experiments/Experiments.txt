@@ -4,3 +4,4 @@ Experiment 1: TEST
 Experiment 2: VGG16
 Experiment 3: DenseNet121 (fully connected 512, SGD) 80%
 Experiment 4: DenseNet121 (fully connected 512, ADAM)
+Experiment 5: DenseNet121 feature extraction
