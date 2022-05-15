@@ -3,5 +3,9 @@ Baseline model: 75.8%
 Experiment 1: TEST
 Experiment 2: VGG16
 Experiment 3: DenseNet121 (fully connected 512, SGD) 80%
-Experiment 4: DenseNet121 (fully connected 512, ADAM)
-Experiment 5: DenseNet121 feature extraction
+Experiment 4: DenseNet121 (fully connected 512, ADAM) 30%
+Experiment 5: DenseNet121 SVM
+Experiment 6:
+Experiment 7: DenseNet121 (2x fully connected 512, SGD) 80,8%
+Experiment 8: DenseNet121 (2x fully connected 512, SGD, dropout(0.2)) 81,1%
+Experiment 9: DenseNet121 (2xfully connected 512, SGD, dropout(0.2), batch_norm) 80,6%

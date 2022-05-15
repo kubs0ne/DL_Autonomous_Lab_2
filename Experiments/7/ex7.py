@@ -12,8 +12,6 @@ from tensorflow.keras import applications
 from keras.callbacks import ModelCheckpoint, LearningRateScheduler, TensorBoard, EarlyStopping
 from keras import optimizers
 
-
-
 num_classes = 29
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parentdir = os.path.dirname(currentdir)
@@ -45,6 +43,8 @@ for layer in model.layers[:10]:
 x = model.output
 x = Flatten()(x)
 x = Dense(512, activation="relu")(x)
+# x = Dropout(0.2)(x)
+x = Dense(512, activation="relu")(x)
 predictions = Dense(num_classes, activation="softmax")(x)
 
 # creating the final model
@@ -71,5 +71,5 @@ history = model_final.fit_generator(
 )
 
 print('Model trained in {:.1f}min'.format((time.time() - t0) / 60))
-model_final.save('model')
+
 ModelEvaluator.evaluate_model(model_final, history, validation_generator)
