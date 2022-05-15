@@ -20,7 +20,7 @@ import ModelEvaluator
 num_classes = 29
 img_width, img_height = 256, 256
 batch_size = 64
-epochs = 10
+epochs = 50
 
 train_generator, validation_generator, test_generator = DataGenerator.data_Gens(parentparentdir, img_height, img_width, batch_size)
 
@@ -33,14 +33,13 @@ for layer in model.layers:
 x = model.output
 x = Flatten()(x)
 x = Dense(512, activation="relu")(x)
-x = Dense(512, activation="relu")(x)
 predictions = Dense(num_classes, activation="softmax")(x)
 
 # creating the final model
 model_final = Model(model.input, predictions)
 
 # compile the model
-model_final.compile(loss = "categorical_crossentropy", optimizer = optimizers.Adam(learning_rate=0.01), metrics=["accuracy"])
+model_final.compile(loss = "categorical_crossentropy", optimizer = optimizers.SGD(lr=0.0001, momentum=0.9), metrics=["accuracy"])
 model_final.summary()
 
 # Train the model
