@@ -18,6 +18,7 @@ from sklearn.metrics import classification_report
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.utils import shuffle
 from sklearn import svm
+import random
 
 num_classes = 29
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
@@ -27,23 +28,11 @@ sys.path.insert(0, parentparentdir)
 import DataGenerator
 import ModelEvaluator
 
-
 img_width, img_height = 256, 256
 batch_size = 64
 epochs = 10
 
-
-# x_train, y_train, x_val, y_val, x_test, y_test = DataGenerator.load_mame(parentparentdir,  dataframe=False)
 x_train, x_val, x_test = DataGenerator.load_mame(parentparentdir,  dataframe=False)
-# print(x_train[0][0])
-# print(x_train[1][0])
-# print(x_train[1])
-# for p in x_train[0]:
-#     print(p)
-#Define the NN architecture
-from keras.models import Sequential
-from keras.layers import Dense, Activation, Conv2D, MaxPooling2D, Flatten
-#Two hidden layers
 
 model= tf.keras.applications.DenseNet121(include_top=False, input_shape=(img_width,img_width,3), weights="imagenet")
 
@@ -54,7 +43,6 @@ for layer in model.layers[:10]:
 def extract_features(data, model):
     X_list = []
     Y_list = []
-
     for path, label in zip(data[0],data[1]):
         # load image
         img = image.load_img(path, target_size=(256,256))
@@ -69,7 +57,6 @@ def extract_features(data, model):
 
         X_list.append(feature_vec.ravel())
         Y_list.append(label)
-        print('done')
     return X_list,Y_list
 
 X_train,Y_train = extract_features(x_train, model)
@@ -81,11 +68,4 @@ svm_lin = svm.SVC(C=1.0, kernel="linear")
 svm_lin.fit(X_train, Y_train)
 y_pred = svm_lin.predict(X_test)
 print(classification_report(Y_test, y_pred))
-# model.summary()
-#
-# pred = model.predict()
-#
-#
-# print('Model trained in {:.1f}min'.format((time.time() - t0) / 60))
-#
-# ModelEvaluator.evaluate_model(model_final, history, validation_generator)
+

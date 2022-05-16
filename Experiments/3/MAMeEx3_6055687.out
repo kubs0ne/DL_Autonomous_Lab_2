@@ -1,0 +1,4 @@
+Found 20300 non-validated image filenames belonging to 29 classes.
+Found 1450 non-validated image filenames belonging to 29 classes.
+Found 15657 non-validated image filenames belonging to 29 classes.
+Downloading data from https://storage.googleapis.com/tensorflow/keras-applications/densenet/densenet121_weights_tf_dim_ordering_tf_kernels_notop.h5

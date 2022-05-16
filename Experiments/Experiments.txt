@@ -9,3 +9,4 @@ Experiment 6:
 Experiment 7: DenseNet121 (2x fully connected 512, SGD) 80,8%
 Experiment 8: DenseNet121 (2x fully connected 512, SGD, dropout(0.2)) 81,1%
 Experiment 9: DenseNet121 (2xfully connected 512, SGD, dropout(0.2), batch_norm) 80,6%
+Experiment 10: DenseNet121 GBT
