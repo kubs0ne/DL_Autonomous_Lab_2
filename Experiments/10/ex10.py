@@ -56,8 +56,9 @@ print(Y_train)
 
 clf = GradientBoostingClassifier(n_estimators=100, learning_rate=1.0, max_depth=1, random_state=0, verbose=1)
 clf.fit(X_train, Y_train)
-clf.score(X_test, Y_test)
+score = clf.score(X_test, Y_test)
 y_pred = clf.predict(X_test)
+print(score)
 print(confusion_matrix(Y_test, y_pred))
 
 
