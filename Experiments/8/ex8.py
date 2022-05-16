@@ -36,7 +36,7 @@ from keras.layers import Dense, Activation, Conv2D, MaxPooling2D, Flatten
 model= tf.keras.applications.DenseNet121(include_top=False, input_shape=(img_width,img_width,3), weights="imagenet")
 
 # Freeze the layers which you don't want to train. Here I am freezing the first 10 layers.
-for layer in model.layers[:10]:
+for layer in model.layers:
     layer.trainable = False
 
 #Adding custom Layers
