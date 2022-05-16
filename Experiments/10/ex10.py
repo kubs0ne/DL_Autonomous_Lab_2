@@ -1,24 +1,14 @@
 import os
 import sys
 import inspect
-import time
 import tensorflow as tf
 from tensorflow.keras.preprocessing import image
-from keras.models import Sequential, Model
-from keras.layers import Dense, Activation, Conv2D, MaxPooling2D, Flatten
-from keras.layers import Dense, Activation, Flatten, Dropout, BatchNormalization, GlobalAveragePooling2D
-from keras.layers import Conv2D, MaxPooling2D, Concatenate, Input
-from keras import regularizers
 from tensorflow.keras import applications
-from keras.callbacks import ModelCheckpoint, LearningRateScheduler, TensorBoard, EarlyStopping
-from keras import optimizers
 import numpy as np
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.utils import shuffle
 from sklearn import svm
-import random
+from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.metrics import confusion_matrix
 
 num_classes = 29
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
@@ -64,8 +54,15 @@ X_test,Y_test = extract_features(x_test, model)
 print(X_train)
 print(Y_train)
 
-svm_lin = svm.SVC(C=1.0, kernel="linear")
-svm_lin.fit(X_train, Y_train)
-y_pred = svm_lin.predict(X_test)
-print(classification_report(Y_test, y_pred))
+clf = GradientBoostingClassifier(n_estimators=100, learning_rate=1.0, max_depth=1, random_state=0, verbose=1)
+clf.fit(X_train, Y_train)
+clf.score(X_test, Y_test)
+y_pred = clf.predict(X_test)
+print(confusion_matrix(Y_test, y_pred))
+
+
+# svm_lin = svm.SVC(C=1.0, kernel="linear")
+# svm_lin.fit(X_train, Y_train)
+# y_pred = svm_lin.predict(X_test)
+# print(classification_report(Y_test, y_pred))
 
