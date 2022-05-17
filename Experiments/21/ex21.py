@@ -23,7 +23,7 @@ import ModelEvaluator
 
 img_width, img_height = 256, 256
 batch_size = 124
-epochs = 30
+epochs = 60
 
 train_generator, validation_generator, test_generator = DataGenerator.data_Gens(parentparentdir, img_height, img_width, batch_size)
 
@@ -33,7 +33,7 @@ from keras.models import Sequential
 from keras.layers import Dense, Activation, Conv2D, MaxPooling2D, Flatten
 #Two hidden layers
 
-model= tf.keras.applications.ResNet50(include_top=False, input_shape=(img_width,img_width,3), weights="imagenet", pooling='max')
+model= tf.keras.applications.ResNet50(include_top=False, input_shape=(img_width,img_width,3), weights="imagenet")
 
 # mark loaded layers as not trainable
 for layer in model.layers:
@@ -42,7 +42,16 @@ for layer in model.layers:
 #Adding custom Layers
 x = model.output
 x = Flatten()(x)
+x = BatchNormalization()(x)
 x = Dense(1024, activation="relu")(x)
+x = Dropout(0.5)(x)
+x = BatchNormalization()(x)
+x = Dense(512, activation="relu")(x)
+x = Dropout(0.4)(x)
+x = BatchNormalization()(x)
+x = Dense(256, activation="relu")(x)
+x = Dropout(0.3)(x)
+x = BatchNormalization()(x)
 predictions = Dense(num_classes, activation="softmax")(x)
 
 
