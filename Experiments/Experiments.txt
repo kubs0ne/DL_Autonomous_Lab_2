@@ -16,5 +16,5 @@ Experiment 13: VGG16 + 1024 dense 61%
 Experiment 14: ResNet + 1024 dense 75%
 Experiment 15: ResNet + 1024 dense + MAX pooling 67%
 Experiment 16: ResNet + 1024 dense + GAVG pooling 67%
-Experiment 17: ResNet + 1024 dense + 512 dense
+Experiment 17: ResNet + 1024 dense + 512 dense 75%
 Experiment 18: ResNet + 1024 dense + 512 dense + BN

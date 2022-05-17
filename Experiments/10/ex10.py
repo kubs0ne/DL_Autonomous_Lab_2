@@ -24,10 +24,10 @@ epochs = 10
 
 x_train, x_val, x_test = DataGenerator.load_mame(parentparentdir,  dataframe=False)
 
-model= tf.keras.applications.DenseNet121(include_top=False, input_shape=(img_width,img_width,3), weights="imagenet", pooling = 'avg')
+model= tf.keras.applications.ResNet50(include_top=False, input_shape=(img_width,img_width,3), weights="imagenet")
 
 # Freeze the layers which you don't want to train. Here I am freezing the first 10 layers.
-for layer in model.layers[:10]:
+for layer in model.layers:
     layer.trainable = False
 
 def extract_features(data, model):
@@ -41,7 +41,7 @@ def extract_features(data, model):
         # add 1 more dimension
         img_arr_b = np.expand_dims(img_arr, axis=0)
         # preprocess image
-        input_img = applications.densenet.preprocess_input(img_arr_b)
+        input_img = applications.resnet50.preprocess_input(img_arr_b)
         # extract feature
         feature_vec = model.predict(input_img)
 
@@ -58,7 +58,7 @@ clf = GradientBoostingClassifier(n_estimators=100, learning_rate=1.0, max_depth=
 clf.fit(X_train, Y_train)
 score = clf.score(X_test, Y_test)
 y_pred = clf.predict(X_test)
-print(score)
+print('accuracy: ',score)
 print(confusion_matrix(Y_test, y_pred))
 
 
