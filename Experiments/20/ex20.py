@@ -36,12 +36,17 @@ from keras.layers import Dense, Activation, Conv2D, MaxPooling2D, Flatten
 model= tf.keras.applications.ResNet50(include_top=False, input_shape=(img_width,img_width,3), weights="imagenet")
 
 # mark loaded layers as not trainable
-model.trainable = False
+for layer in model.layers:
+	layer.trainable = False
+
 #Adding custom Layers
 x = model.output
 x = Flatten()(x)
 x = Dense(1024, activation="relu")(x)
+x = Dropout(0.5)(x)
 x = Dense(512, activation="relu")(x)
+x = Dropout(0.5)(x)
+
 predictions = Dense(num_classes, activation="softmax")(x)
 
 # creating the final model
