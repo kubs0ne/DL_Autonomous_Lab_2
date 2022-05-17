@@ -23,7 +23,7 @@ import ModelEvaluator
 
 img_width, img_height = 256, 256
 batch_size = 64
-epochs = 30
+epochs = 100
 
 train_generator, validation_generator, test_generator = DataGenerator.data_Gens(parentparentdir, img_height, img_width, batch_size)
 
@@ -33,7 +33,7 @@ from keras.models import Sequential
 from keras.layers import Dense, Activation, Conv2D, MaxPooling2D, Flatten
 #Two hidden layers
 
-model= tf.keras.applications.DenseNet121(include_top=False, input_shape=(img_width,img_width,3), weights="imagenet")
+model= tf.keras.applications.DenseNet121(include_top=False, input_shape=(img_width,img_width,3), weights="imagenet", pooling = 'avg')
 
 # Freeze the layers which you don't want to train. Here I am freezing the first 10 layers.
 for layer in model.layers:

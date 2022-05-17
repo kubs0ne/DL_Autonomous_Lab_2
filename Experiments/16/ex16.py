@@ -12,8 +12,6 @@ from tensorflow.keras import applications
 from keras.callbacks import ModelCheckpoint, LearningRateScheduler, TensorBoard, EarlyStopping
 from keras import optimizers
 
-
-
 num_classes = 29
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parentdir = os.path.dirname(currentdir)
@@ -24,8 +22,8 @@ import ModelEvaluator
 
 
 img_width, img_height = 256, 256
-batch_size = 64
-epochs = 10
+batch_size = 124
+epochs = 30
 
 train_generator, validation_generator, test_generator = DataGenerator.data_Gens(parentparentdir, img_height, img_width, batch_size)
 
@@ -35,16 +33,16 @@ from keras.models import Sequential
 from keras.layers import Dense, Activation, Conv2D, MaxPooling2D, Flatten
 #Two hidden layers
 
-model= tf.keras.applications.DenseNet121(include_top=False, input_shape=(img_width,img_width,3), weights="imagenet", pooling = 'avg')
+model= tf.keras.applications.ResNet50(include_top=False, input_shape=(img_width,img_width,3), weights="imagenet", pooling = 'avg')
 
-# Freeze the layers which you don't want to train. Here I am freezing the first 10 layers.
+# mark loaded layers as not trainable
 for layer in model.layers:
-    layer.trainable = False
+	layer.trainable = False
 
 #Adding custom Layers
 x = model.output
 x = Flatten()(x)
-x = Dense(512, activation="relu")(x)
+x = Dense(1024, activation="relu")(x)
 predictions = Dense(num_classes, activation="softmax")(x)
 
 # creating the final model
