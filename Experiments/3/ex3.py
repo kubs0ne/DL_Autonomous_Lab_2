@@ -44,7 +44,9 @@ for layer in model.layers:
 #Adding custom Layers
 x = model.output
 x = Flatten()(x)
-x = Dense(512, activation="relu")(x)
+x = BatchNormalization()(x)
+x = Dense(1024, activation="relu")(x)
+x = BatchNormalization()(x)
 predictions = Dense(num_classes, activation="softmax")(x)
 
 # creating the final model

@@ -1,0 +1,79 @@
+load GCC/8.3.0 (PATH, MANPATH, INFOPATH, LIBRARY_PATH, LD_LIBRARY_PATH, STD
+COMP VARS) 
+load FFMPEG/4.2.1 (PATH, LIBRARY_PATH, PKG_CONFIG_PATH, C_INCLUDE_PATH,
+CPLUS_INCLUDE_PATH) 
+load CUDA/10.2 (PATH, MANPATH, LD_LIBRARY_PATH, LIBRARY_PATH, C_INCLUDE_PATH,
+CPLUS_INCLUDE_PATH, CUDA_HOME, CUDA_VERSION, CUDA_INC, CUDA_INSTALL_PATH) 
+load CUDNN/7.6.4 (LD_LIBRARY_PATH, LIBRARY_PATH, C_INCLUDE_PATH,
+CPLUS_INCLUDE_PATH, CUDNN_LIB_DIR, CUDNN_LIBRARY, CUDNN_INCLUDE_DIR) 
+load NCCL/2.4.8 (LD_LIBRARY_PATH, LIBRARY_PATH, C_INCLUDE_PATH,
+CPLUS_INCLUDE_PATH) 
+load TENSORRT/6.0.1 (PATH, LD_LIBRARY_PATH, LIBRARY_PATH, C_INCLUDE_PATH,
+CPLUS_INCLUDE_PATH) 
+load OPENMPI/4.0.1 (PATH, MANPATH, LD_LIBRARY_PATH, LIBRARY_PATH,
+PKG_CONFIG_PATH, C_INCLUDE_PATH, CPLUS_INCLUDE_PATH, MPI, MPI_V) 
+load ATLAS/3.10.3 (LD_LIBRARY_PATH, LIBRARY_PATH, C_INCLUDE_PATH,
+CPLUS_INCLUDE_PATH) 
+load SCALAPACK/2.0.2 (LD_LIBRARY_PATH, LIBRARY_PATH, PKG_CONFIG_PATH) 
+load FFTW/3.3.8 (PATH, MANPATH, LD_LIBRARY_PATH, LIBRARY_PATH, C_INCLUDE_PATH,
+CPLUS_INCLUDE_PATH, PKG_CONFIG_PATH) 
+load SZIP/2.1.1 (LD_LIBRARY_PATH, LIBRARY_PATH, C_INCLUDE_PATH,
+CPLUS_INCLUDE_PATH) 
+load OPENCV/4.1.1 (PATH, LD_LIBRARY_PATH, LIBRARY_PATH, C_INCLUDE_PATH,
+CPLUS_INCLUDE_PATH, PYTHONPATH) 
+load PYTHON/3.7.4_ML (PATH, MANPATH, LD_LIBRARY_PATH, LIBRARY_PATH,
+PKG_CONFIG_PATH, C_INCLUDE_PATH, CPLUS_INCLUDE_PATH, PYTHONHOME, PYTHONPATH,
+OMPI_MCA_mpi_warn_on_fork, PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION,
+PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION_VERSION) 
+2022-05-18 14:31:23.997090: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudart.so.10.2
+2022-05-18 14:31:30.449376: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcuda.so.1
+2022-05-18 14:31:30.492075: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1716] Found device 0 with properties: 
+pciBusID: 0004:05:00.0 name: Tesla V100-SXM2-16GB computeCapability: 7.0
+coreClock: 1.53GHz coreCount: 80 deviceMemorySize: 15.75GiB deviceMemoryBandwidth: 836.37GiB/s
+2022-05-18 14:31:30.492126: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudart.so.10.2
+2022-05-18 14:31:30.494890: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcublas.so.10
+2022-05-18 14:31:30.496848: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcufft.so.10
+2022-05-18 14:31:30.497736: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcurand.so.10
+2022-05-18 14:31:30.499484: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcusolver.so.10
+2022-05-18 14:31:30.501004: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcusparse.so.10
+2022-05-18 14:31:30.504557: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudnn.so.7
+2022-05-18 14:31:30.507050: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1858] Adding visible gpu devices: 0
+2022-05-18 14:31:30.529442: I tensorflow/core/platform/profile_utils/cpu_utils.cc:104] CPU Frequency: 3783000000 Hz
+2022-05-18 14:31:30.532491: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x4522ad10 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2022-05-18 14:31:30.532537: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+2022-05-18 14:31:30.619630: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x45297400 initialized for platform CUDA (this does not guarantee that XLA will be used). Devices:
+2022-05-18 14:31:30.619743: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Tesla V100-SXM2-16GB, Compute Capability 7.0
+2022-05-18 14:31:30.622320: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1716] Found device 0 with properties: 
+pciBusID: 0004:05:00.0 name: Tesla V100-SXM2-16GB computeCapability: 7.0
+coreClock: 1.53GHz coreCount: 80 deviceMemorySize: 15.75GiB deviceMemoryBandwidth: 836.37GiB/s
+2022-05-18 14:31:30.622361: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudart.so.10.2
+2022-05-18 14:31:30.622413: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcublas.so.10
+2022-05-18 14:31:30.622446: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcufft.so.10
+2022-05-18 14:31:30.622479: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcurand.so.10
+2022-05-18 14:31:30.622511: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcusolver.so.10
+2022-05-18 14:31:30.622544: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcusparse.so.10
+2022-05-18 14:31:30.622577: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudnn.so.7
+2022-05-18 14:31:30.625258: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1858] Adding visible gpu devices: 0
+2022-05-18 14:31:30.625295: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudart.so.10.2
+2022-05-18 14:31:31.259035: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1257] Device interconnect StreamExecutor with strength 1 edge matrix:
+2022-05-18 14:31:31.259165: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1263]      0 
+2022-05-18 14:31:31.259182: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1276] 0:   N 
+2022-05-18 14:31:31.262471: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1402] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 14728 MB memory) -> physical GPU (device: 0, name: Tesla V100-SXM2-16GB, pci bus id: 0004:05:00.0, compute capability: 7.0)
+WARNING:tensorflow:From ex31.py:76: Model.fit_generator (from tensorflow.python.keras.engine.training) is deprecated and will be removed in a future version.
+Instructions for updating:
+Please use Model.fit, which supports generators.
+2022-05-18 14:32:08.151692: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcublas.so.10
+2022-05-18 14:32:08.385910: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudnn.so.7
+2022-05-18 14:32:10.035210: W tensorflow/core/common_runtime/bfc_allocator.cc:246] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.41GiB with freed_by_count=0. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+2022-05-18 14:32:10.052650: W tensorflow/core/common_runtime/bfc_allocator.cc:246] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.81GiB with freed_by_count=0. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+2022-05-18 14:32:10.093214: W tensorflow/core/common_runtime/bfc_allocator.cc:246] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.33GiB with freed_by_count=0. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+2022-05-18 14:32:10.102503: W tensorflow/core/common_runtime/bfc_allocator.cc:246] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.81GiB with freed_by_count=0. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+2022-05-18 14:32:10.163956: W tensorflow/core/common_runtime/bfc_allocator.cc:246] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.41GiB with freed_by_count=0. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+2022-05-18 14:32:10.178387: W tensorflow/core/common_runtime/bfc_allocator.cc:246] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.28GiB with freed_by_count=0. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+WARNING:tensorflow:From /apps/PYTHON/3.7.4_ML/lib/python3.7/site-packages/tensorflow/python/training/tracking/tracking.py:111: Model.state_updates (from tensorflow.python.keras.engine.training) is deprecated and will be removed in a future version.
+Instructions for updating:
+This property should not be used in TensorFlow 2.0, as updates are applied automatically.
+2022-05-18 14:33:39.510358: W tensorflow/python/util/util.cc:348] Sets are not currently considered sequences, but this may change in the future, so consider avoiding using them.
+WARNING:tensorflow:From /apps/PYTHON/3.7.4_ML/lib/python3.7/site-packages/tensorflow/python/training/tracking/tracking.py:111: Layer.updates (from tensorflow.python.keras.engine.base_layer) is deprecated and will be removed in a future version.
+Instructions for updating:
+This property should not be used in TensorFlow 2.0, as updates are applied automatically.

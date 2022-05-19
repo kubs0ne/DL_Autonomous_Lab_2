@@ -36,38 +36,40 @@ from keras.layers import Dense, Activation, Conv2D, MaxPooling2D, Flatten
 model= tf.keras.applications.ResNet50(include_top=False, input_shape=(img_width,img_width,3), weights="imagenet")
 
 # mark loaded layers as not trainable
-for layer in model.layers:
+j = 0
+for layer in model.layers[:7]:
 	layer.trainable = False
-
+for i, layer in enumerate(model.layers):
+	print(i, layer)
 #Adding custom Layers
-x = model.output
-x = Flatten()(x)
-x = Dense(1024, activation="relu")(x)
-predictions = Dense(num_classes, activation="softmax")(x)
-
-# creating the final model
-model_final = Model(model.input, predictions)
-
-# compile the model
-model_final.compile(loss = "categorical_crossentropy", optimizer = optimizers.SGD(lr=0.0001, momentum=0.9), metrics=["accuracy"])
-model_final.summary()
-
-# Train the model
-t0 = time.time()
-STEP_SIZE_TRAIN = train_generator.n // train_generator.batch_size
-STEP_SIZE_VAL = validation_generator.n // validation_generator.batch_size
-
-early = EarlyStopping(monitor='val_loss', min_delta=0.00001, patience=10, verbose=1, mode='auto',
-                      restore_best_weights=True)
-
-history = model_final.fit_generator(
-    generator=train_generator,
-    steps_per_epoch= STEP_SIZE_TRAIN,
-    validation_data=validation_generator,
-    validation_steps= STEP_SIZE_VAL,
-    epochs=epochs
-)
-
-print('Model trained in {:.1f}min'.format((time.time() - t0) / 60))
-
-ModelEvaluator.evaluate_model(model_final, history, validation_generator)
+# x = model.output
+# x = Flatten()(x)
+# x = Dense(512, activation="relu")(x)
+# predictions = Dense(num_classes, activation="softmax")(x)
+#
+# # creating the final model
+# model_final = Model(model.input, predictions)
+#
+# # compile the model
+# model_final.compile(loss = "categorical_crossentropy", optimizer = optimizers.SGD(lr=0.0001, momentum=0.9), metrics=["accuracy"])
+# model_final.summary()
+#
+# # Train the model
+# t0 = time.time()
+# STEP_SIZE_TRAIN = train_generator.n // train_generator.batch_size
+# STEP_SIZE_VAL = validation_generator.n // validation_generator.batch_size
+#
+# early = EarlyStopping(monitor='val_loss', min_delta=0.00001, patience=10, verbose=1, mode='auto',
+#                       restore_best_weights=True)
+#
+# history = model_final.fit_generator(
+#     generator=train_generator,
+#     steps_per_epoch= STEP_SIZE_TRAIN,
+#     validation_data=validation_generator,
+#     validation_steps= STEP_SIZE_VAL,
+#     epochs=epochs
+# )
+#
+# print('Model trained in {:.1f}min'.format((time.time() - t0) / 60))
+#
+# ModelEvaluator.evaluate_model(model_final, history, validation_generator)

@@ -59,17 +59,28 @@ t0 = time.time()
 STEP_SIZE_TRAIN = train_generator.n // train_generator.batch_size
 STEP_SIZE_VAL = validation_generator.n // validation_generator.batch_size
 
-early = EarlyStopping(monitor='val_loss', min_delta=0.00001, patience=10, verbose=1, mode='auto',
+early = EarlyStopping(monitor='val_loss', min_delta=0.00001, patience=5, verbose=1, mode='auto',
                       restore_best_weights=True)
+
+earlyStopping = EarlyStopping(monitor='val_loss', patience=10, verbose=0, mode='min')
+# Save the best model and also safe the last model which is not more 1% discrepance between validation accu
+mcp_save_best = tf.keras.callbacks.ModelCheckpoint(
+    filepath='best_model',
+    save_weights_only=True,
+    monitor='val_accuracy',
+    mode='max',
+    save_best_only=True)
+
+
+
 
 history = model_final.fit_generator(
     generator=train_generator,
     steps_per_epoch= STEP_SIZE_TRAIN,
     validation_data=validation_generator,
     validation_steps= STEP_SIZE_VAL,
-    epochs=epochs
+    epochs=epochs,
+    callbacks=[earlyStopping, mcp_save_best]
 )
 
-print('Model trained in {:.1f}min'.format((time.time() - t0) / 60))
-model_final.save('model')
 ModelEvaluator.evaluate_model(model_final, history, validation_generator)

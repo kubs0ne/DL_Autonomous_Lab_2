@@ -18,3 +18,6 @@ Experiment 15: ResNet + 1024 dense + MAX pooling 67%
 Experiment 16: ResNet + 1024 dense + GAVG pooling 67%
 Experiment 17: ResNet + 1024 dense + 512 dense 75%
 Experiment 18: ResNet + 1024 dense + 512 dense + BN
+Experiment 26: ResNet + 1024 dense + 512 dense + 256 dense + Dropout + L2 reg 78,1%
+Experiment 27: Densenet + 1024 dense + 512 dense + 256 dense + Dropout + L2 reg
+Experiment 31: Fine tuning of exp 26

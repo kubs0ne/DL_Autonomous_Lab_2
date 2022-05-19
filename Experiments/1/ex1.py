@@ -23,7 +23,7 @@ import ModelEvaluator
 
 img_width, img_height = 256, 256
 batch_size = 64
-epochs = 10
+epochs = 30
 
 train_generator, validation_generator, test_generator = DataGenerator.data_Gens(parentparentdir, img_height, img_width, batch_size)
 
@@ -32,18 +32,15 @@ train_generator, validation_generator, test_generator = DataGenerator.data_Gens(
 from keras.models import Sequential
 from keras.layers import Dense, Activation, Conv2D, MaxPooling2D, Flatten
 #Two hidden layers
-model = applications.VGG16(weights = "imagenet", include_top=False, input_shape = (img_width, img_height, 3))
+model = applications.DenseNet121(weights = "imagenet", include_top=False, input_shape = (img_width, img_height, 3))
 
 # Freeze the layers which you don't want to train. Here I am freezing the first 10 layers.
-for layer in model.layers[:10]:
+for layer in model.layers:
     layer.trainable = False
 
 #Adding custom Layers
 x = model.output
 x = Flatten()(x)
-x = Dense(512, activation="relu")(x)
-x = Dropout(0.2)(x)
-x = Dense(512, activation="relu")(x)
 predictions = Dense(num_classes, activation="softmax")(x)
 
 # creating the final model
@@ -58,17 +55,28 @@ t0 = time.time()
 STEP_SIZE_TRAIN = train_generator.n // train_generator.batch_size
 STEP_SIZE_VAL = validation_generator.n // validation_generator.batch_size
 
-early = EarlyStopping(monitor='val_loss', min_delta=0.00001, patience=10, verbose=1, mode='auto',
+early = EarlyStopping(monitor='val_loss', min_delta=0.00001, patience=5, verbose=1, mode='auto',
                       restore_best_weights=True)
+
+earlyStopping = EarlyStopping(monitor='val_loss', patience=10, verbose=0, mode='min')
+# Save the best model and also safe the last model which is not more 1% discrepance between validation accu
+mcp_save_best = tf.keras.callbacks.ModelCheckpoint(
+    filepath='best_model',
+    save_weights_only=False,
+    monitor='val_accuracy',
+    mode='max',
+    save_best_only=True)
+
+
+
 
 history = model_final.fit_generator(
     generator=train_generator,
     steps_per_epoch= STEP_SIZE_TRAIN,
     validation_data=validation_generator,
     validation_steps= STEP_SIZE_VAL,
-    epochs=epochs
+    epochs=epochs,
+    callbacks=[earlyStopping, mcp_save_best]
 )
-
-print('Model trained in {:.1f}min'.format((time.time() - t0) / 60))
 
 ModelEvaluator.evaluate_model(model_final, history, validation_generator)

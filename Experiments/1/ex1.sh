@@ -4,8 +4,6 @@
 
 #SBATCH --qos=training
 
-#SBATCH --workdir=.
-
 #SBATCH --output=/home/nct01/nct01036/AutoLab2/Experiments/1/MAMeEx1_%j.out
 
 #SBATCH --error=/home/nct01/nct01036/AutoLab2/Experiments/1/MAMeEx1_%j.err
