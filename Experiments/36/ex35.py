@@ -11,6 +11,7 @@ from keras import regularizers
 from tensorflow.keras import applications
 from keras.callbacks import ModelCheckpoint, LearningRateScheduler, TensorBoard, EarlyStopping
 from keras import optimizers
+import keras
 
 num_classes = 29
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
@@ -22,8 +23,8 @@ import ModelEvaluator
 
 
 img_width, img_height = 256, 256
-batch_size = 124
-epochs = 100
+batch_size = 64
+epochs = 120
 
 train_generator, validation_generator, test_generator = DataGenerator.data_Gens(parentparentdir, img_height, img_width, batch_size)
 
@@ -33,24 +34,19 @@ from keras.models import Sequential
 from keras.layers import Dense, Activation, Conv2D, MaxPooling2D, Flatten
 #Two hidden layers
 
-model= tf.keras.applications.ResNet50(include_top=False, input_shape=(img_width,img_width,3), weights="imagenet", pooling = 'avg')
-
+# model = keras.models.load_model('/home/kuba/Desktop/MAI_SEM2/DL/DL_Autonomous_Lab_2/Models/model_ex_29')
+model = keras.models.load_model('/home/nct01/nct01036/AutoLab2/Models/model_ex_29')
 # mark loaded layers as not trainable
-for layer in model.layers:
-	layer.trainable = False
+for i, layer in enumerate(model.layers):
+    if i<53:
+        layer.trainable = False
+    else:
+        layer.trainable = True
 
-#Adding custom Layers
-x = model.output
-x = Flatten()(x)
-x = Dense(1024, activation="relu")(x)
-predictions = Dense(num_classes, activation="softmax")(x)
-
-# creating the final model
-model_final = Model(model.input, predictions)
 
 # compile the model
-model_final.compile(loss = "categorical_crossentropy", optimizer = optimizers.SGD(lr=0.0001, momentum=0.9), metrics=["accuracy"])
-model_final.summary()
+model.compile(loss = "categorical_crossentropy", optimizer = optimizers.SGD(lr=0.0001, momentum=0.9), metrics=["accuracy"])
+model.summary()
 
 # Train the model
 t0 = time.time()
@@ -72,7 +68,7 @@ mcp_save_best = tf.keras.callbacks.ModelCheckpoint(
 
 
 
-history = model_final.fit_generator(
+history = model.fit_generator(
     generator=train_generator,
     steps_per_epoch= STEP_SIZE_TRAIN,
     validation_data=validation_generator,
@@ -81,4 +77,4 @@ history = model_final.fit_generator(
     callbacks=[earlyStopping, mcp_save_best]
 )
 
-ModelEvaluator.evaluate_model(model_final, history, validation_generator)
+ModelEvaluator.evaluate_model(model, history, validation_generator)

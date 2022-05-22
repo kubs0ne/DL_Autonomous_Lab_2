@@ -43,27 +43,11 @@ for layer in model.layers:
 #Adding custom Layers
 x = model.output
 x = Flatten()(x)
+x = BatchNormalization()(x)
 x = Dense( 
         units = 1024, 
-        activation="relu",
-        kernel_regularizer=regularizers.L2(l2=1e-4),
-        bias_regularizer=regularizers.L2(1e-4),
-        activity_regularizer=regularizers.L2(1e-5))(x)
-x = Dropout(0.5)(x)
-x = Dense( 
-        units = 512, 
-        activation="relu",
-        kernel_regularizer=regularizers.L2(l2=1e-4),
-        bias_regularizer=regularizers.L2(1e-4),
-        activity_regularizer=regularizers.L2(1e-5))(x)
-x = Dropout(0.4)(x)
-x = Dense( 
-        units = 256, 
-        activation="relu",
-        kernel_regularizer=regularizers.L2(l2=1e-4),
-        bias_regularizer=regularizers.L2(1e-4),
-        activity_regularizer=regularizers.L2(1e-5))(x)
-x = Dropout(0.3)(x)
+        activation="relu")(x)
+x = BatchNormalization()(x)
 predictions = Dense(num_classes, activation="softmax")(x)
 
 
